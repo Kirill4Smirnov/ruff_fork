@@ -1179,6 +1179,23 @@ impl<'db> Type<'db> {
             .and_then(|instance| instance.own_tuple_spec(db))
     }
 
+    /// If this type is a fixed-length tuple instance, returns a slice of its element types.
+    ///
+    /// Returns `None` if this is not a tuple instance, or if it's a variable-length tuple.
+    fn fixed_tuple_elements(&self, db: &'db dyn Db) -> Option<Cow<'db, [Type<'db>]>> {
+        let tuple_spec = self.tuple_instance_spec(db)?;
+        match tuple_spec {
+            Cow::Borrowed(spec) => {
+                let elements = spec.as_fixed_length()?.elements_slice();
+                Some(Cow::Borrowed(elements))
+            }
+            Cow::Owned(spec) => {
+                let elements = spec.as_fixed_length()?.elements_slice();
+                Some(Cow::Owned(elements.to_vec()))
+            }
+        }
+    }
+
     /// Returns the materialization of this type depending on the given `variance`.
     ///
     /// More concretely, `T'`, the materialization of `T`, is the type `T` with all occurrences of
@@ -1223,6 +1240,15 @@ impl<'db> Type<'db> {
 
     pub(crate) fn has_typevar(self, db: &'db dyn Db) -> bool {
         any_over_type(db, self, false, |ty| matches!(ty, Type::TypeVar(_)))
+    }
+
+    pub(crate) fn has_non_self_typevar(self, db: &'db dyn Db) -> bool {
+        any_over_type(
+            db,
+            self,
+            false,
+            |ty| matches!(ty, Type::TypeVar(tv) if !tv.typevar(db).is_self(db)),
+        )
     }
 
     pub(crate) fn has_unspecialized_type_var(self, db: &'db dyn Db) -> bool {
@@ -4111,7 +4137,7 @@ impl<'db> Type<'db> {
                                     // errors instead of `type-assertion-failure` errors.
                                     .with_annotated_type(Type::any())],
                             ),
-                            Type::none(db),
+                            Type::Never,
                         ),
                     )
                     .into()
@@ -4327,9 +4353,12 @@ impl<'db> Type<'db> {
                     .map(|element| element.bindings(db)),
             ),
 
-            Type::Intersection(_) => {
-                Binding::single(self, Signature::todo("Type::Intersection.call")).into()
-            }
+            Type::Intersection(intersection) => Bindings::from_intersection(
+                self,
+                intersection
+                    .positive_elements_or_object(db)
+                    .map(|element| element.bindings(db)),
+            ),
 
             Type::DataclassDecorator(_) => {
                 let typevar = BoundTypeVarInstance::synthetic(
@@ -5041,6 +5070,38 @@ impl<'db> Type<'db> {
         tcx: TypeContext<'db>,
         policy: MemberLookupPolicy,
     ) -> Result<Bindings<'db>, CallDunderError<'db>> {
+        // For intersection types, call the dunder on each element separately and combine
+        // the results. This avoids intersecting bound methods (which often collapses to Never)
+        // and instead intersects the return types.
+        //
+        // TODO: we might be able to remove this after fixing
+        // https://github.com/astral-sh/ty/issues/2428.
+        if let Type::Intersection(intersection) = self {
+            // Using `positive()` rather than `positive_elements_or_object()` is safe
+            // here because `object` does not define any of the dunders that are called
+            // through this path without `MRO_NO_OBJECT_FALLBACK` (e.g. `__await__`,
+            // `__iter__`, `__enter__`, `__bool__`).
+            let positive = intersection.positive(db);
+
+            let mut successful_bindings = Vec::with_capacity(positive.len());
+            let mut last_error = None;
+
+            for element in positive {
+                match element.try_call_dunder_with_policy(db, name, argument_types, tcx, policy) {
+                    Ok(bindings) => successful_bindings.push(bindings),
+                    Err(err) => last_error = Some(err),
+                }
+            }
+
+            if successful_bindings.is_empty() {
+                // TODO we are only showing one of the errors here; should we aggregate them
+                // somehow or show all of them?
+                return Err(last_error.unwrap_or(CallDunderError::MethodNotAvailable));
+            }
+
+            return Ok(Bindings::from_intersection(self, successful_bindings));
+        }
+
         // Implicit calls to dunder methods never access instance members, so we pass
         // `NO_INSTANCE_FALLBACK` here in addition to other policies:
         match self
@@ -5702,6 +5763,20 @@ impl<'db> Type<'db> {
                 }
             }
             Type::Union(union) => union.try_map(db, |ty| ty.generator_return_type(db)),
+            Type::Intersection(intersection) => {
+                let mut builder = IntersectionBuilder::new(db);
+                let mut any_success = false;
+                // Using `positive()` rather than `positive_elements_or_object()` is safe
+                // here because `object` is not a generator, so falling back to it would
+                // still return `None`.
+                for ty in intersection.positive(db) {
+                    if let Some(return_ty) = ty.generator_return_type(db) {
+                        builder = builder.add_positive(return_ty);
+                        any_success = true;
+                    }
+                }
+                any_success.then(|| builder.build())
+            }
             ty @ (Type::Dynamic(_) | Type::Never) => Some(ty),
             _ => None,
         }
