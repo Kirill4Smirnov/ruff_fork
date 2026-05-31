@@ -1,0 +1,54 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP062 The `flags` parameter to `select.epoll()` is deprecated; use `os.set_inheritable()` if needed
+  --> UP062.py:8:18
+   |
+ 6 | select.epoll()
+ 7 | select.epoll(10)
+ 8 | select.epoll(10, 0)
+   |                  ^
+ 9 | select.epoll(flags=0)
+10 | select.epoll(sizehint=10, flags=select.EPOLL_CLOEXEC)
+   |
+
+UP062 The `flags` parameter to `select.epoll()` is deprecated; use `os.set_inheritable()` if needed
+  --> UP062.py:9:14
+   |
+ 7 | select.epoll(10)
+ 8 | select.epoll(10, 0)
+ 9 | select.epoll(flags=0)
+   |              ^^^^^^^
+10 | select.epoll(sizehint=10, flags=select.EPOLL_CLOEXEC)
+11 | epoll(flags=EPOLL_CLOEXEC)
+   |
+
+UP062 The `flags` parameter to `select.epoll()` is deprecated; use `os.set_inheritable()` if needed
+  --> UP062.py:10:27
+   |
+ 8 | select.epoll(10, 0)
+ 9 | select.epoll(flags=0)
+10 | select.epoll(sizehint=10, flags=select.EPOLL_CLOEXEC)
+   |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+11 | epoll(flags=EPOLL_CLOEXEC)
+12 | ep(10, EPOLL_CLOEXEC)
+   |
+
+UP062 The `flags` parameter to `select.epoll()` is deprecated; use `os.set_inheritable()` if needed
+  --> UP062.py:11:7
+   |
+ 9 | select.epoll(flags=0)
+10 | select.epoll(sizehint=10, flags=select.EPOLL_CLOEXEC)
+11 | epoll(flags=EPOLL_CLOEXEC)
+   |       ^^^^^^^^^^^^^^^^^^^
+12 | ep(10, EPOLL_CLOEXEC)
+   |
+
+UP062 The `flags` parameter to `select.epoll()` is deprecated; use `os.set_inheritable()` if needed
+  --> UP062.py:12:8
+   |
+10 | select.epoll(sizehint=10, flags=select.EPOLL_CLOEXEC)
+11 | epoll(flags=EPOLL_CLOEXEC)
+12 | ep(10, EPOLL_CLOEXEC)
+   |        ^^^^^^^^^^^^^
+   |
