@@ -1,0 +1,132 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP055 `sys.last_type` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:17:1
+   |
+15 | dummy = Dummy()
+16 |
+17 | sys.last_type
+   | ^^^^^^^^^^^^^
+18 | sys.last_value
+19 | sys.last_traceback
+   |
+
+UP055 `sys.last_value` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:18:1
+   |
+17 | sys.last_type
+18 | sys.last_value
+   | ^^^^^^^^^^^^^^
+19 | sys.last_traceback
+20 | s.last_type
+   |
+
+UP055 `sys.last_traceback` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:19:1
+   |
+17 | sys.last_type
+18 | sys.last_value
+19 | sys.last_traceback
+   | ^^^^^^^^^^^^^^^^^^
+20 | s.last_type
+21 | s.last_value
+   |
+
+UP055 `sys.last_type` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:20:1
+   |
+18 | sys.last_value
+19 | sys.last_traceback
+20 | s.last_type
+   | ^^^^^^^^^^^
+21 | s.last_value
+22 | s.last_traceback
+   |
+
+UP055 `sys.last_value` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:21:1
+   |
+19 | sys.last_traceback
+20 | s.last_type
+21 | s.last_value
+   | ^^^^^^^^^^^^
+22 | s.last_traceback
+23 | last_type
+   |
+
+UP055 `sys.last_traceback` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:22:1
+   |
+20 | s.last_type
+21 | s.last_value
+22 | s.last_traceback
+   | ^^^^^^^^^^^^^^^^
+23 | last_type
+24 | last_value
+   |
+
+UP055 `sys.last_type` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:23:1
+   |
+21 | s.last_value
+22 | s.last_traceback
+23 | last_type
+   | ^^^^^^^^^
+24 | last_value
+25 | last_traceback
+   |
+
+UP055 `sys.last_value` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:24:1
+   |
+22 | s.last_traceback
+23 | last_type
+24 | last_value
+   | ^^^^^^^^^^
+25 | last_traceback
+26 | last_type_alias
+   |
+
+UP055 `sys.last_traceback` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:25:1
+   |
+23 | last_type
+24 | last_value
+25 | last_traceback
+   | ^^^^^^^^^^^^^^
+26 | last_type_alias
+27 | last_value_alias
+   |
+
+UP055 `sys.last_type` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:26:1
+   |
+24 | last_value
+25 | last_traceback
+26 | last_type_alias
+   | ^^^^^^^^^^^^^^^
+27 | last_value_alias
+28 | last_traceback_alias
+   |
+
+UP055 `sys.last_value` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:27:1
+   |
+25 | last_traceback
+26 | last_type_alias
+27 | last_value_alias
+   | ^^^^^^^^^^^^^^^^
+28 | last_traceback_alias
+   |
+
+UP055 `sys.last_traceback` is deprecated, use `sys.last_exc` instead
+  --> UP055.py:28:1
+   |
+26 | last_type_alias
+27 | last_value_alias
+28 | last_traceback_alias
+   | ^^^^^^^^^^^^^^^^^^^^
+29 |
+30 | sys.last_exc
+   |

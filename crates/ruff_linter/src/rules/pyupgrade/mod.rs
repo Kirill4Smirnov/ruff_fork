@@ -243,6 +243,33 @@ mod tests {
         Ok(())
     }
 
+    #[test_case(Rule::DeprecatedSysLastVars, Path::new("UP055.py"))]
+    fn rules_py312(rule_code: Rule, path: &Path) -> Result<()> {
+        let snapshot = format!("rules_py312__{}", path.to_string_lossy());
+        let diagnostics = test_path(
+            Path::new("pyupgrade").join(path).as_path(),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY312.into(),
+                ..settings::LinterSettings::for_rule(rule_code)
+            },
+        )?;
+        assert_diagnostics!(snapshot, diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn up055_py311() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP055.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY311.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedSysLastVars)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
     #[test_case(Rule::NonPEP695TypeAlias, Path::new("UP040.py"))]
     #[test_case(Rule::NonPEP695TypeAlias, Path::new("UP040.pyi"))]
     #[test_case(Rule::NonPEP695GenericClass, Path::new("UP046_0.py"))]
