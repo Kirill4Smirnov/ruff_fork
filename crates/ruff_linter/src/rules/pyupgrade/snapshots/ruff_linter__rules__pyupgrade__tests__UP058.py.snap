@@ -1,0 +1,80 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP058 [*] `abc.abstractstaticmethod` is deprecated, use `@staticmethod` with `@abstractmethod` instead
+  --> UP058.py:11:5
+   |
+10 | class A:
+11 |     @abstractstaticmethod
+   |     ^^^^^^^^^^^^^^^^^^^^^
+12 |     def f(): ...
+   |
+help: Replace with `@staticmethod` and `@abstractmethod`
+8  |
+9  |
+10 | class A:
+   -     @abstractstaticmethod
+11 +     @staticmethod
+12 +     @abstractmethod
+13 |     def f(): ...
+14 |
+15 |
+
+UP058 [*] `abc.abstractstaticmethod` is deprecated, use `@staticmethod` with `@abstractmethod` instead
+  --> UP058.py:16:5
+   |
+15 | class B:
+16 |     @abc.abstractstaticmethod
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+17 |     def g(): ...
+   |
+help: Replace with `@staticmethod` and `@abstractmethod`
+13 |
+14 |
+15 | class B:
+   -     @abc.abstractstaticmethod
+16 +     @staticmethod
+17 +     @abstractmethod
+18 |     def g(): ...
+19 |
+20 |
+
+UP058 [*] `abc.abstractstaticmethod` is deprecated, use `@staticmethod` with `@abstractmethod` instead
+  --> UP058.py:21:5
+   |
+20 | class C:
+21 |     @asm
+   |     ^^^^
+22 |     def h(): ...
+   |
+help: Replace with `@staticmethod` and `@abstractmethod`
+18 |
+19 |
+20 | class C:
+   -     @asm
+21 +     @staticmethod
+22 +     @abstractmethod
+23 |     def h(): ...
+24 |
+25 |
+
+UP058 [*] `abc.abstractstaticmethod` is deprecated, use `@staticmethod` with `@abstractmethod` instead
+  --> UP058.py:27:5
+   |
+25 | class D:
+26 |     @other_decorator
+27 |     @abc.abstractstaticmethod  # comment
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+28 |     def i(): ...
+   |
+help: Replace with `@staticmethod` and `@abstractmethod`
+24 |
+25 | class D:
+26 |     @other_decorator
+   -     @abc.abstractstaticmethod  # comment
+27 +     @staticmethod
+28 +     @abstractmethod
+29 |     def i(): ...
+30 |
+31 |
+note: This is an unsafe fix and may change runtime behavior
