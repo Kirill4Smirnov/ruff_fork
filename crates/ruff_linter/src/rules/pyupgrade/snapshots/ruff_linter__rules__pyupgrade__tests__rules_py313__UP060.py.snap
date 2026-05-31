@@ -1,0 +1,135 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:16:1
+   |
+16 | PurePath("NUL").is_reserved()
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+17 | pathlib.Path("CON").is_reserved()
+18 | P("PRN").is_reserved()
+   |
+help: Replace with `os.path.isreserved()`
+13 |     return PurePath("LPT2")
+14 |
+15 |
+   - PurePath("NUL").is_reserved()
+16 + isreserved(PurePath("NUL"))
+17 | pathlib.Path("CON").is_reserved()
+18 | P("PRN").is_reserved()
+19 | path.is_reserved()
+
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:17:1
+   |
+16 | PurePath("NUL").is_reserved()
+17 | pathlib.Path("CON").is_reserved()
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+18 | P("PRN").is_reserved()
+19 | path.is_reserved()
+   |
+help: Replace with `os.path.isreserved()`
+14 |
+15 |
+16 | PurePath("NUL").is_reserved()
+   - pathlib.Path("CON").is_reserved()
+17 + isreserved(pathlib.Path("CON"))
+18 | P("PRN").is_reserved()
+19 | path.is_reserved()
+20 | pure_path.is_reserved()
+
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:18:1
+   |
+16 | PurePath("NUL").is_reserved()
+17 | pathlib.Path("CON").is_reserved()
+18 | P("PRN").is_reserved()
+   | ^^^^^^^^^^^^^^^^^^^^
+19 | path.is_reserved()
+20 | pure_path.is_reserved()
+   |
+help: Replace with `os.path.isreserved()`
+15 |
+16 | PurePath("NUL").is_reserved()
+17 | pathlib.Path("CON").is_reserved()
+   - P("PRN").is_reserved()
+18 + isreserved(P("PRN"))
+19 | path.is_reserved()
+20 | pure_path.is_reserved()
+21 |
+
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:19:1
+   |
+17 | pathlib.Path("CON").is_reserved()
+18 | P("PRN").is_reserved()
+19 | path.is_reserved()
+   | ^^^^^^^^^^^^^^^^
+20 | pure_path.is_reserved()
+   |
+help: Replace with `os.path.isreserved()`
+16 | PurePath("NUL").is_reserved()
+17 | pathlib.Path("CON").is_reserved()
+18 | P("PRN").is_reserved()
+   - path.is_reserved()
+19 + isreserved(path)
+20 | pure_path.is_reserved()
+21 |
+22 |
+
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:20:1
+   |
+18 | P("PRN").is_reserved()
+19 | path.is_reserved()
+20 | pure_path.is_reserved()
+   | ^^^^^^^^^^^^^^^^^^^^^
+   |
+help: Replace with `os.path.isreserved()`
+17 | pathlib.Path("CON").is_reserved()
+18 | P("PRN").is_reserved()
+19 | path.is_reserved()
+   - pure_path.is_reserved()
+20 + isreserved(pure_path)
+21 |
+22 |
+23 | def f(p: PurePath) -> bool:
+
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:24:12
+   |
+23 | def f(p: PurePath) -> bool:
+24 |     return p.is_reserved()
+   |            ^^^^^^^^^^^^^
+   |
+help: Replace with `os.path.isreserved()`
+21 |
+22 |
+23 | def f(p: PurePath) -> bool:
+   -     return p.is_reserved()
+24 +     return isreserved(p)
+25 |
+26 |
+27 | Path(
+
+UP060 [*] `PurePath.is_reserved()` is deprecated, use `os.path.isreserved()` instead
+  --> UP060.py:27:1
+   |
+27 | / Path(
+28 | |     "LPT1",  # comment
+29 | | ).is_reserved()
+   | |_____________^
+   |
+help: Replace with `os.path.isreserved()`
+24 |     return p.is_reserved()
+25 |
+26 |
+   - Path(
+27 + isreserved(Path(
+28 |     "LPT1",  # comment
+   - ).is_reserved()
+29 + ))
+30 |
+31 |
+32 | other.is_reserved()
+note: This is an unsafe fix and may change runtime behavior

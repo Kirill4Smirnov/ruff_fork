@@ -230,6 +230,7 @@ mod tests {
     }
 
     #[test_case(Rule::QuotedAnnotation, Path::new("UP037_3.py"))]
+    #[test_case(Rule::DeprecatedPurePathIsReserved, Path::new("UP060.py"))]
     fn rules_py313(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("rules_py313__{}", path.to_string_lossy());
         let diagnostics = test_path(
@@ -288,6 +289,19 @@ mod tests {
             &settings::LinterSettings {
                 unresolved_target_version: PythonVersion::PY310.into(),
                 ..settings::LinterSettings::for_rule(Rule::TimeoutErrorAlias)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn up060_not_applied_py312() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP060.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY312.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedPurePathIsReserved)
             },
         )?;
         assert_diagnostics!(diagnostics);
