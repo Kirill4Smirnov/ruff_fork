@@ -308,6 +308,33 @@ mod tests {
     }
 
     #[test]
+    fn deprecated_codecs_open_py314() -> Result<()> {
+        let snapshot = "UP052.py";
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP052.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY314.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedCodecsOpen)
+            },
+        )?;
+        assert_diagnostics!(snapshot, diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn deprecated_codecs_open_not_applied_py313() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP052.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY313.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedCodecsOpen)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
+    #[test]
     fn future_annotations_keep_runtime_typing_p37() -> Result<()> {
         let diagnostics = test_path(
             Path::new("pyupgrade/future_annotations.py"),

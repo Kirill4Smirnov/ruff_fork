@@ -1,0 +1,41 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP052 `codecs.open` is deprecated, use builtin `open`
+ --> UP052.py:6:1
+  |
+4 | from codecs import open as codecs_open
+5 |
+6 | codecs.open("file.txt")
+  | ^^^^^^^^^^^
+7 | c.open("file.txt")
+  |
+
+UP052 `codecs.open` is deprecated, use builtin `open`
+ --> UP052.py:7:1
+  |
+5 |
+6 | codecs.open("file.txt")
+7 | c.open("file.txt")
+  | ^^^^^^
+8 | open("file.txt")
+  |
+
+UP052 `codecs.open` is deprecated, use builtin `open`
+ --> UP052.py:8:1
+  |
+6 | codecs.open("file.txt")
+7 | c.open("file.txt")
+8 | open("file.txt")
+  | ^^^^
+9 | codecs_open("file.txt")
+  |
+
+UP052 `codecs.open` is deprecated, use builtin `open`
+ --> UP052.py:9:1
+  |
+7 | c.open("file.txt")
+8 | open("file.txt")
+9 | codecs_open("file.txt")
+  | ^^^^^^^^^^^
+  |

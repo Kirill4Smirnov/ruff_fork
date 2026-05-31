@@ -680,6 +680,9 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
             if checker.is_rule_enabled(Rule::OpenAlias) {
                 pyupgrade::rules::open_alias(checker, expr, func);
             }
+            if checker.is_rule_enabled(Rule::DeprecatedCodecsOpen) {
+                pyupgrade::rules::deprecated_codecs_open(checker, func);
+            }
             if checker.is_rule_enabled(Rule::ReplaceUniversalNewlines) {
                 pyupgrade::rules::replace_universal_newlines(checker, call);
             }
