@@ -238,6 +238,11 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
         ) => {
             match ctx {
                 ExprContext::Load => {
+                    if checker.is_rule_enabled(Rule::DeprecatedDecimalHaveThreads) {
+                        if checker.target_version() >= PythonVersion::PY39 {
+                            pyupgrade::rules::deprecated_decimal_have_threads(checker, expr);
+                        }
+                    }
                     if checker.is_rule_enabled(Rule::TypingTextStrAlias) {
                         pyupgrade::rules::typing_text_str_alias(checker, expr);
                     }
@@ -465,6 +470,11 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
             }
             if checker.is_rule_enabled(Rule::RegexFlagAlias) {
                 refurb::rules::regex_flag_alias(checker, expr);
+            }
+            if checker.is_rule_enabled(Rule::DeprecatedDecimalHaveThreads) {
+                if checker.target_version() >= PythonVersion::PY39 {
+                    pyupgrade::rules::deprecated_decimal_have_threads(checker, expr);
+                }
             }
             if checker.is_rule_enabled(Rule::DatetimeTimezoneUTC) {
                 if checker.target_version() >= PythonVersion::PY311 {

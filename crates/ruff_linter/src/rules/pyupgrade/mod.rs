@@ -243,6 +243,33 @@ mod tests {
         Ok(())
     }
 
+    #[test_case(Rule::DeprecatedDecimalHaveThreads, Path::new("UP056.py"))]
+    fn rules_py39(rule_code: Rule, path: &Path) -> Result<()> {
+        let snapshot = format!("rules_py39__{}", path.to_string_lossy());
+        let diagnostics = test_path(
+            Path::new("pyupgrade").join(path).as_path(),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY39.into(),
+                ..settings::LinterSettings::for_rule(rule_code)
+            },
+        )?;
+        assert_diagnostics!(snapshot, diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn up056_py38() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP056.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY38.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedDecimalHaveThreads)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
     #[test_case(Rule::NonPEP695TypeAlias, Path::new("UP040.py"))]
     #[test_case(Rule::NonPEP695TypeAlias, Path::new("UP040.pyi"))]
     #[test_case(Rule::NonPEP695GenericClass, Path::new("UP046_0.py"))]

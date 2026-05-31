@@ -1,0 +1,78 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP056 [*] `decimal.HAVE_THREADS` is deprecated; it is always `True`
+  --> UP056.py:13:1
+   |
+11 | dummy = Dummy()
+12 |
+13 | decimal.HAVE_THREADS
+   | ^^^^^^^^^^^^^^^^^^^^
+14 | d.HAVE_THREADS
+15 | HAVE_THREADS
+   |
+help: Replace with `True`
+11 | dummy = Dummy()
+12 |
+  - decimal.HAVE_THREADS
+13 + True
+14 | d.HAVE_THREADS
+15 | HAVE_THREADS
+16 | HAVE_THREADS_ALIAS
+
+UP056 [*] `decimal.HAVE_THREADS` is deprecated; it is always `True`
+  --> UP056.py:14:1
+   |
+12 |
+13 | decimal.HAVE_THREADS
+14 | d.HAVE_THREADS
+   | ^^^^^^^^^^^^^^
+15 | HAVE_THREADS
+16 | HAVE_THREADS_ALIAS
+   |
+help: Replace with `True`
+12 |
+13 | decimal.HAVE_THREADS
+  - d.HAVE_THREADS
+14 + True
+15 | HAVE_THREADS
+16 | HAVE_THREADS_ALIAS
+17 |
+
+UP056 [*] `decimal.HAVE_THREADS` is deprecated; it is always `True`
+  --> UP056.py:15:1
+   |
+13 | decimal.HAVE_THREADS
+14 | d.HAVE_THREADS
+15 | HAVE_THREADS
+   | ^^^^^^^^^^^^
+16 | HAVE_THREADS_ALIAS
+17 |
+   |
+help: Replace with `True`
+13 | decimal.HAVE_THREADS
+14 | d.HAVE_THREADS
+  - HAVE_THREADS
+15 + True
+16 | HAVE_THREADS_ALIAS
+17 |
+18 | decimal.HAVE_CONTEXTVAR
+
+UP056 [*] `decimal.HAVE_THREADS` is deprecated; it is always `True`
+  --> UP056.py:16:1
+   |
+14 | d.HAVE_THREADS
+15 | HAVE_THREADS
+16 | HAVE_THREADS_ALIAS
+   | ^^^^^^^^^^^^^^^^^^
+17 |
+18 | decimal.HAVE_CONTEXTVAR
+   |
+help: Replace with `True`
+14 | d.HAVE_THREADS
+15 | HAVE_THREADS
+  - HAVE_THREADS_ALIAS
+16 + True
+17 |
+18 | decimal.HAVE_CONTEXTVAR
+19 | dummy.HAVE_THREADS
