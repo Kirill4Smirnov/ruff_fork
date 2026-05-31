@@ -1,0 +1,84 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP053 [*] `array` typecode `u` is deprecated, use `w` instead
+  --> UP053.py:14:13
+   |
+12 | typecode = "u"
+13 |
+14 | array.array("u", "abc")
+   |             ^^^
+15 | a.array("u", "abc")
+16 | array_alias("u", "abc")
+   |
+help: Replace with `w` typecode
+11 | dummy = Dummy()
+12 | typecode = "u"
+13 |
+   - array.array("u", "abc")
+14 + array.array("w", "abc")
+15 | a.array("u", "abc")
+16 | array_alias("u", "abc")
+17 | array.array(typecode="u", initializer="abc")
+note: This is an unsafe fix and may change runtime behavior
+
+UP053 [*] `array` typecode `u` is deprecated, use `w` instead
+  --> UP053.py:15:9
+   |
+14 | array.array("u", "abc")
+15 | a.array("u", "abc")
+   |         ^^^
+16 | array_alias("u", "abc")
+17 | array.array(typecode="u", initializer="abc")
+   |
+help: Replace with `w` typecode
+12 | typecode = "u"
+13 |
+14 | array.array("u", "abc")
+   - a.array("u", "abc")
+15 + a.array("w", "abc")
+16 | array_alias("u", "abc")
+17 | array.array(typecode="u", initializer="abc")
+18 |
+note: This is an unsafe fix and may change runtime behavior
+
+UP053 [*] `array` typecode `u` is deprecated, use `w` instead
+  --> UP053.py:16:13
+   |
+14 | array.array("u", "abc")
+15 | a.array("u", "abc")
+16 | array_alias("u", "abc")
+   |             ^^^
+17 | array.array(typecode="u", initializer="abc")
+   |
+help: Replace with `w` typecode
+13 |
+14 | array.array("u", "abc")
+15 | a.array("u", "abc")
+   - array_alias("u", "abc")
+16 + array_alias("w", "abc")
+17 | array.array(typecode="u", initializer="abc")
+18 |
+19 | array.array("w", "abc")
+note: This is an unsafe fix and may change runtime behavior
+
+UP053 [*] `array` typecode `u` is deprecated, use `w` instead
+  --> UP053.py:17:22
+   |
+15 | a.array("u", "abc")
+16 | array_alias("u", "abc")
+17 | array.array(typecode="u", initializer="abc")
+   |                      ^^^
+18 |
+19 | array.array("w", "abc")
+   |
+help: Replace with `w` typecode
+14 | array.array("u", "abc")
+15 | a.array("u", "abc")
+16 | array_alias("u", "abc")
+   - array.array(typecode="u", initializer="abc")
+17 + array.array(typecode="w", initializer="abc")
+18 |
+19 | array.array("w", "abc")
+20 | array.array("b", [1, 2, 3])
+note: This is an unsafe fix and may change runtime behavior

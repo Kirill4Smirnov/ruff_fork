@@ -230,6 +230,7 @@ mod tests {
     }
 
     #[test_case(Rule::QuotedAnnotation, Path::new("UP037_3.py"))]
+    #[test_case(Rule::DeprecatedArrayTypecode, Path::new("UP053.py"))]
     fn rules_py313(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("rules_py313__{}", path.to_string_lossy());
         let diagnostics = test_path(
@@ -240,6 +241,19 @@ mod tests {
             },
         )?;
         assert_diagnostics!(snapshot, diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn up053_py312() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP053.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY312.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedArrayTypecode)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
         Ok(())
     }
 
