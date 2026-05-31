@@ -1,0 +1,80 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP057 [*] `abc.abstractclassmethod` is deprecated, use `@classmethod` with `@abstractmethod` instead
+  --> UP057.py:11:5
+   |
+10 | class A:
+11 |     @abstractclassmethod
+   |     ^^^^^^^^^^^^^^^^^^^^
+12 |     def f(cls): ...
+   |
+help: Replace with `@classmethod` and `@abstractmethod`
+8  |
+9  |
+10 | class A:
+   -     @abstractclassmethod
+11 +     @classmethod
+12 +     @abstractmethod
+13 |     def f(cls): ...
+14 |
+15 |
+
+UP057 [*] `abc.abstractclassmethod` is deprecated, use `@classmethod` with `@abstractmethod` instead
+  --> UP057.py:16:5
+   |
+15 | class B:
+16 |     @abc.abstractclassmethod
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+17 |     def g(cls): ...
+   |
+help: Replace with `@classmethod` and `@abstractmethod`
+13 |
+14 |
+15 | class B:
+   -     @abc.abstractclassmethod
+16 +     @classmethod
+17 +     @abstractmethod
+18 |     def g(cls): ...
+19 |
+20 |
+
+UP057 [*] `abc.abstractclassmethod` is deprecated, use `@classmethod` with `@abstractmethod` instead
+  --> UP057.py:21:5
+   |
+20 | class C:
+21 |     @acm
+   |     ^^^^
+22 |     def h(cls): ...
+   |
+help: Replace with `@classmethod` and `@abstractmethod`
+18 |
+19 |
+20 | class C:
+   -     @acm
+21 +     @classmethod
+22 +     @abstractmethod
+23 |     def h(cls): ...
+24 |
+25 |
+
+UP057 [*] `abc.abstractclassmethod` is deprecated, use `@classmethod` with `@abstractmethod` instead
+  --> UP057.py:27:5
+   |
+25 | class D:
+26 |     @other_decorator
+27 |     @abc.abstractclassmethod  # comment
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+28 |     def i(cls): ...
+   |
+help: Replace with `@classmethod` and `@abstractmethod`
+24 |
+25 | class D:
+26 |     @other_decorator
+   -     @abc.abstractclassmethod  # comment
+27 +     @classmethod
+28 +     @abstractmethod
+29 |     def i(cls): ...
+30 |
+31 |
+note: This is an unsafe fix and may change runtime behavior

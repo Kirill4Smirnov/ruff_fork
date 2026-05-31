@@ -174,6 +174,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
                     pyupgrade::rules::lru_cache_without_parameters(checker, decorator_list);
                 }
             }
+            if checker.is_rule_enabled(Rule::DeprecatedAbstractClassmethod) {
+                pyupgrade::rules::deprecated_abstractclassmethod(checker, decorator_list);
+            }
             if checker.is_rule_enabled(Rule::LRUCacheWithMaxsizeNone) {
                 if checker.target_version() >= PythonVersion::PY39 {
                     pyupgrade::rules::lru_cache_with_maxsize_none(checker, decorator_list);
