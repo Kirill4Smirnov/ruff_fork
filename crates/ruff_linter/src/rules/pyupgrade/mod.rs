@@ -230,6 +230,7 @@ mod tests {
     }
 
     #[test_case(Rule::QuotedAnnotation, Path::new("UP037_3.py"))]
+    #[test_case(Rule::DeprecatedPlatformJavaVer, Path::new("UP061.py"))]
     fn rules_py313(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("rules_py313__{}", path.to_string_lossy());
         let diagnostics = test_path(
@@ -530,6 +531,19 @@ mod tests {
             &settings::LinterSettings {
                 unresolved_target_version: PythonVersion::PY39.into(),
                 ..settings::LinterSettings::for_rule(Rule::NonPEP604AnnotationOptional)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn up061_not_applied_py312() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP061.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY312.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedPlatformJavaVer)
             },
         )?;
         assert_diagnostics!(diagnostics);

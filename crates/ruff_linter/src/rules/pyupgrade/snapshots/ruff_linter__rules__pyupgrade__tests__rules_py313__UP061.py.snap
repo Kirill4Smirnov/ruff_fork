@@ -1,0 +1,40 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP061 `platform.java_ver()` is deprecated and will be removed in Python 3.15
+ --> UP061.py:6:1
+  |
+6 | platform.java_ver()
+  | ^^^^^^^^^^^^^^^^^
+7 | platform.java_ver("1.0")
+8 | java_ver()
+  |
+
+UP061 `platform.java_ver()` is deprecated and will be removed in Python 3.15
+ --> UP061.py:7:1
+  |
+6 | platform.java_ver()
+7 | platform.java_ver("1.0")
+  | ^^^^^^^^^^^^^^^^^
+8 | java_ver()
+9 | jv(vendor="Acme")
+  |
+
+UP061 `platform.java_ver()` is deprecated and will be removed in Python 3.15
+ --> UP061.py:8:1
+  |
+6 | platform.java_ver()
+7 | platform.java_ver("1.0")
+8 | java_ver()
+  | ^^^^^^^^
+9 | jv(vendor="Acme")
+  |
+
+UP061 `platform.java_ver()` is deprecated and will be removed in Python 3.15
+ --> UP061.py:9:1
+  |
+7 | platform.java_ver("1.0")
+8 | java_ver()
+9 | jv(vendor="Acme")
+  | ^^
+  |
