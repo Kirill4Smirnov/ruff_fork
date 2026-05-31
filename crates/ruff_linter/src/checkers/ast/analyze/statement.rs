@@ -180,6 +180,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             if checker.is_rule_enabled(Rule::DeprecatedAbstractStaticmethod) {
                 pyupgrade::rules::deprecated_abstractstaticmethod(checker, decorator_list);
             }
+            if checker.is_rule_enabled(Rule::DeprecatedAbstractProperty) {
+                pyupgrade::rules::deprecated_abstractproperty(checker, decorator_list);
+            }
             if checker.is_rule_enabled(Rule::LRUCacheWithMaxsizeNone) {
                 if checker.target_version() >= PythonVersion::PY39 {
                     pyupgrade::rules::lru_cache_with_maxsize_none(checker, decorator_list);

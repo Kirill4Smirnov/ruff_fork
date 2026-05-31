@@ -74,6 +74,7 @@ mod tests {
     #[test_case(Rule::ReplaceStrEnum, Path::new("UP042.py"))]
     #[test_case(Rule::DeprecatedAbstractClassmethod, Path::new("UP057.py"))]
     #[test_case(Rule::DeprecatedAbstractStaticmethod, Path::new("UP058.py"))]
+    #[test_case(Rule::DeprecatedAbstractProperty, Path::new("UP059.py"))]
     #[test_case(Rule::TypeOfPrimitive, Path::new("UP003.py"))]
     #[test_case(Rule::TypingTextStrAlias, Path::new("UP019.py"))]
     #[test_case(Rule::UTF8EncodingDeclaration, Path::new("UP009_0.py"))]

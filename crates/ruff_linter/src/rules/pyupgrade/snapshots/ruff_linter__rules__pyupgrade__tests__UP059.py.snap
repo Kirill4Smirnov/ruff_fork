@@ -1,0 +1,80 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP059 [*] `abc.abstractproperty` is deprecated, use `@property` with `@abstractmethod` instead
+  --> UP059.py:11:5
+   |
+10 | class A:
+11 |     @abstractproperty
+   |     ^^^^^^^^^^^^^^^^^
+12 |     def f(self): ...
+   |
+help: Replace with `@property` and `@abstractmethod`
+8  |
+9  |
+10 | class A:
+   -     @abstractproperty
+11 +     @property
+12 +     @abstractmethod
+13 |     def f(self): ...
+14 |
+15 |
+
+UP059 [*] `abc.abstractproperty` is deprecated, use `@property` with `@abstractmethod` instead
+  --> UP059.py:16:5
+   |
+15 | class B:
+16 |     @abc.abstractproperty
+   |     ^^^^^^^^^^^^^^^^^^^^^
+17 |     def g(self): ...
+   |
+help: Replace with `@property` and `@abstractmethod`
+13 |
+14 |
+15 | class B:
+   -     @abc.abstractproperty
+16 +     @property
+17 +     @abstractmethod
+18 |     def g(self): ...
+19 |
+20 |
+
+UP059 [*] `abc.abstractproperty` is deprecated, use `@property` with `@abstractmethod` instead
+  --> UP059.py:21:5
+   |
+20 | class C:
+21 |     @ap
+   |     ^^^
+22 |     def h(self): ...
+   |
+help: Replace with `@property` and `@abstractmethod`
+18 |
+19 |
+20 | class C:
+   -     @ap
+21 +     @property
+22 +     @abstractmethod
+23 |     def h(self): ...
+24 |
+25 |
+
+UP059 [*] `abc.abstractproperty` is deprecated, use `@property` with `@abstractmethod` instead
+  --> UP059.py:27:5
+   |
+25 | class D:
+26 |     @other_decorator
+27 |     @abc.abstractproperty  # comment
+   |     ^^^^^^^^^^^^^^^^^^^^^
+28 |     def i(self): ...
+   |
+help: Replace with `@property` and `@abstractmethod`
+24 |
+25 | class D:
+26 |     @other_decorator
+   -     @abc.abstractproperty  # comment
+27 +     @property
+28 +     @abstractmethod
+29 |     def i(self): ...
+30 |
+31 |
+note: This is an unsafe fix and may change runtime behavior
