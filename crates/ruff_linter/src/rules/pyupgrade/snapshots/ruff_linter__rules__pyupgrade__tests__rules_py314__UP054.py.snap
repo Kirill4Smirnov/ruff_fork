@@ -1,0 +1,68 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP054 `sys.monitoring.events.BRANCH` is deprecated, use `BRANCH_LEFT` or `BRANCH_RIGHT` instead
+  --> UP054.py:15:1
+   |
+13 | dummy = Dummy()
+14 |
+15 | sys.monitoring.events.BRANCH
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+16 | s.monitoring.events.BRANCH
+17 | monitoring.events.BRANCH
+   |
+
+UP054 `sys.monitoring.events.BRANCH` is deprecated, use `BRANCH_LEFT` or `BRANCH_RIGHT` instead
+  --> UP054.py:16:1
+   |
+14 |
+15 | sys.monitoring.events.BRANCH
+16 | s.monitoring.events.BRANCH
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+17 | monitoring.events.BRANCH
+18 | events.BRANCH
+   |
+
+UP054 `sys.monitoring.events.BRANCH` is deprecated, use `BRANCH_LEFT` or `BRANCH_RIGHT` instead
+  --> UP054.py:17:1
+   |
+15 | sys.monitoring.events.BRANCH
+16 | s.monitoring.events.BRANCH
+17 | monitoring.events.BRANCH
+   | ^^^^^^^^^^^^^^^^^^^^^^^^
+18 | events.BRANCH
+19 | BRANCH
+   |
+
+UP054 `sys.monitoring.events.BRANCH` is deprecated, use `BRANCH_LEFT` or `BRANCH_RIGHT` instead
+  --> UP054.py:18:1
+   |
+16 | s.monitoring.events.BRANCH
+17 | monitoring.events.BRANCH
+18 | events.BRANCH
+   | ^^^^^^^^^^^^^
+19 | BRANCH
+20 | BRANCH_ALIAS
+   |
+
+UP054 `sys.monitoring.events.BRANCH` is deprecated, use `BRANCH_LEFT` or `BRANCH_RIGHT` instead
+  --> UP054.py:19:1
+   |
+17 | monitoring.events.BRANCH
+18 | events.BRANCH
+19 | BRANCH
+   | ^^^^^^
+20 | BRANCH_ALIAS
+21 |
+   |
+
+UP054 `sys.monitoring.events.BRANCH` is deprecated, use `BRANCH_LEFT` or `BRANCH_RIGHT` instead
+  --> UP054.py:20:1
+   |
+18 | events.BRANCH
+19 | BRANCH
+20 | BRANCH_ALIAS
+   | ^^^^^^^^^^^^
+21 |
+22 | sys.monitoring.events.BRANCH_LEFT
+   |
