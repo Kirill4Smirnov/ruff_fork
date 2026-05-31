@@ -32,7 +32,7 @@ use crate::Violation;
 /// ## References
 /// - [Python documentation: `codecs.open`](https://docs.python.org/3/library/codecs.html#codecs.open)
 #[derive(ViolationMetadata)]
-#[violation_metadata(stable_since = "v0.15.15")]
+#[violation_metadata(stable_since = "0.15.15")]
 pub(crate) struct DeprecatedCodecsOpen;
 
 impl Violation for DeprecatedCodecsOpen {
