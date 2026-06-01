@@ -73,6 +73,7 @@ mod tests {
     #[test_case(Rule::TimeoutErrorAlias, Path::new("UP041.py"))]
     #[test_case(Rule::ReplaceStrEnum, Path::new("UP042.py"))]
     #[test_case(Rule::TypeOfPrimitive, Path::new("UP003.py"))]
+    #[test_case(Rule::DeprecatedUnittestTestMethodReturnValue, Path::new("UP065.py"))]
     #[test_case(Rule::TypingTextStrAlias, Path::new("UP019.py"))]
     #[test_case(Rule::UTF8EncodingDeclaration, Path::new("UP009_0.py"))]
     #[test_case(Rule::UTF8EncodingDeclaration, Path::new("UP009_1.py"))]
@@ -288,6 +289,21 @@ mod tests {
             &settings::LinterSettings {
                 unresolved_target_version: PythonVersion::PY310.into(),
                 ..settings::LinterSettings::for_rule(Rule::TimeoutErrorAlias)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn deprecated_unittest_test_method_return_value_not_applied_py310() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP065.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY310.into(),
+                ..settings::LinterSettings::for_rule(
+                    Rule::DeprecatedUnittestTestMethodReturnValue,
+                )
             },
         )?;
         assert_diagnostics!(diagnostics);

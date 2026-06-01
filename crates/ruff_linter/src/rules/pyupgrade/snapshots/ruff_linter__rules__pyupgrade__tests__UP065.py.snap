@@ -1,0 +1,58 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP065 Returning a value from a `unittest` test method is deprecated
+  --> UP065.py:12:9
+   |
+10 | class Direct(unittest.TestCase):
+11 |     def test_value(self):
+12 |         return 1
+   |         ^^^^^^^^
+13 |
+14 |     def test_none(self):
+   |
+
+UP065 Returning a value from a `unittest` test method is deprecated
+  --> UP065.py:26:9
+   |
+24 | class Aliased(TC):
+25 |     def runTest(self):
+26 |         return "value"
+   |         ^^^^^^^^^^^^^^
+   |
+
+UP065 Returning a value from a `unittest` test method is deprecated
+  --> UP065.py:31:9
+   |
+29 | class Indirect(Base):
+30 |     def test_indirect(self):
+31 |         return object()
+   |         ^^^^^^^^^^^^^^^
+   |
+
+UP065 Returning a value from a `unittest` test method is deprecated
+  --> UP065.py:36:9
+   |
+34 | class SubmoduleCase(CaseTestCase):
+35 |     def test_submodule(self):
+36 |         return b"value"
+   |         ^^^^^^^^^^^^^^^
+   |
+
+UP065 Returning a value from a `unittest` test method is deprecated
+  --> UP065.py:41:9
+   |
+39 | class Async(unittest.IsolatedAsyncioTestCase):
+40 |     async def test_async(self):
+41 |         return 1
+   |         ^^^^^^^^
+   |
+
+UP065 Returning a value from a `unittest` test method is deprecated
+  --> UP065.py:58:9
+   |
+56 |             return 1
+57 |
+58 |         return inner()
+   |         ^^^^^^^^^^^^^^
+   |

@@ -371,6 +371,9 @@ pub(crate) fn statement(stmt: &Stmt, checker: &mut Checker) {
             if checker.is_rule_enabled(Rule::ReturnInInit) {
                 pylint::rules::return_in_init(checker, stmt);
             }
+            if checker.is_rule_enabled(Rule::DeprecatedUnittestTestMethodReturnValue) {
+                pyupgrade::rules::deprecated_unittest_test_method_return_value(checker, stmt);
+            }
         }
         Stmt::ClassDef(
             class_def @ ast::StmtClassDef {
