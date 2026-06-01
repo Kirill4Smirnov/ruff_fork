@@ -1,0 +1,113 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP064 [*] Passing file paths to `mimetypes.guess_type()` is soft deprecated; use `guess_file_type()` instead
+  --> UP064.py:11:1
+   |
+11 | mimetypes.guess_type(path)
+   | ^^^^^^^^^^^^^^^^^^^^
+12 | guess_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+   |
+help: Replace with `guess_file_type()`
+8  | db = mimetypes.MimeTypes()
+9  |
+10 |
+   - mimetypes.guess_type(path)
+11 + mimetypes.guess_file_type(path)
+12 | guess_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+
+UP064 [*] Passing file paths to `mimetypes.guess_type()` is soft deprecated; use `guess_file_type()` instead
+  --> UP064.py:12:1
+   |
+11 | mimetypes.guess_type(path)
+12 | guess_type(path, strict=False)
+   | ^^^^^^^^^^
+13 | gt(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+   |
+help: Replace with `guess_file_type()`
+9  |
+10 |
+11 | mimetypes.guess_type(path)
+   - guess_type(path, strict=False)
+12 + mimetypes.guess_file_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+15 | db.guess_type(path)
+
+UP064 [*] Passing file paths to `mimetypes.guess_type()` is soft deprecated; use `guess_file_type()` instead
+  --> UP064.py:13:1
+   |
+11 | mimetypes.guess_type(path)
+12 | guess_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+   | ^^
+14 | mimetypes.MimeTypes().guess_type(path)
+15 | db.guess_type(path)
+   |
+help: Replace with `guess_file_type()`
+10 |
+11 | mimetypes.guess_type(path)
+12 | guess_type(path, strict=False)
+   - gt(PurePath("archive.tar.gz"))
+13 + mimetypes.guess_file_type(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+15 | db.guess_type(path)
+16 |
+
+UP064 [*] Passing file paths to `mimetypes.guess_type()` is soft deprecated; use `guess_file_type()` instead
+  --> UP064.py:14:1
+   |
+12 | guess_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+15 | db.guess_type(path)
+   |
+help: Replace with `guess_file_type()`
+11 | mimetypes.guess_type(path)
+12 | guess_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+   - mimetypes.MimeTypes().guess_type(path)
+14 + mimetypes.MimeTypes().guess_file_type(path)
+15 | db.guess_type(path)
+16 |
+17 |
+
+UP064 [*] Passing file paths to `mimetypes.guess_type()` is soft deprecated; use `guess_file_type()` instead
+  --> UP064.py:15:1
+   |
+13 | gt(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+15 | db.guess_type(path)
+   | ^^^^^^^^^^^^^
+   |
+help: Replace with `guess_file_type()`
+12 | guess_type(path, strict=False)
+13 | gt(PurePath("archive.tar.gz"))
+14 | mimetypes.MimeTypes().guess_type(path)
+   - db.guess_type(path)
+15 + db.guess_file_type(path)
+16 |
+17 |
+18 | def f(db: MimeTypes, path: PurePath) -> None:
+
+UP064 [*] Passing file paths to `mimetypes.guess_type()` is soft deprecated; use `guess_file_type()` instead
+  --> UP064.py:19:5
+   |
+18 | def f(db: MimeTypes, path: PurePath) -> None:
+19 |     db.guess_type(path)
+   |     ^^^^^^^^^^^^^
+   |
+help: Replace with `guess_file_type()`
+16 |
+17 |
+18 | def f(db: MimeTypes, path: PurePath) -> None:
+   -     db.guess_type(path)
+19 +     db.guess_file_type(path)
+20 |
+21 |
+22 | mimetypes.guess_type("https://example.com/image.png")
