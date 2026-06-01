@@ -229,6 +229,20 @@ mod tests {
         Ok(())
     }
 
+    #[test_case(Rule::DeprecatedPathlibPositionalArgs, Path::new("UP063.py"))]
+    fn rules_py312(rule_code: Rule, path: &Path) -> Result<()> {
+        let snapshot = format!("rules_py312__{}", path.to_string_lossy());
+        let diagnostics = test_path(
+            Path::new("pyupgrade").join(path).as_path(),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY312.into(),
+                ..settings::LinterSettings::for_rule(rule_code)
+            },
+        )?;
+        assert_diagnostics!(snapshot, diagnostics);
+        Ok(())
+    }
+
     #[test_case(Rule::QuotedAnnotation, Path::new("UP037_3.py"))]
     fn rules_py313(rule_code: Rule, path: &Path) -> Result<()> {
         let snapshot = format!("rules_py313__{}", path.to_string_lossy());
@@ -301,6 +315,19 @@ mod tests {
             &settings::LinterSettings {
                 unresolved_target_version: PythonVersion::PY311.into(),
                 ..settings::LinterSettings::for_rule(Rule::NonPEP695TypeAlias)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn up063_not_applied_py311() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP063.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY311.into(),
+                ..settings::LinterSettings::for_rule(Rule::DeprecatedPathlibPositionalArgs)
             },
         )?;
         assert_diagnostics!(diagnostics);
