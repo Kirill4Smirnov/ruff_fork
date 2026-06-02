@@ -770,6 +770,7 @@ pub const PREVIEW_DEFAULT_SELECTORS: &[RuleSelector] = &[
     RuleSelector::rule(RuleCodePrefix::Pyupgrade(codes::Pyupgrade::_049)), // UP049
     RuleSelector::rule(RuleCodePrefix::Pyupgrade(codes::Pyupgrade::_050)), // UP050
     RuleSelector::rule(RuleCodePrefix::Pyupgrade(codes::Pyupgrade::_067)), // UP067
+    RuleSelector::rule(RuleCodePrefix::Pyupgrade(codes::Pyupgrade::_068)), // UP068
     RuleSelector::rule(RuleCodePrefix::Pycodestyle(codes::Pycodestyle::W605)), // W605
     RuleSelector::rule(RuleCodePrefix::Flake82020(codes::Flake82020::_101)), // YTT101
     RuleSelector::rule(RuleCodePrefix::Flake82020(codes::Flake82020::_102)), // YTT102

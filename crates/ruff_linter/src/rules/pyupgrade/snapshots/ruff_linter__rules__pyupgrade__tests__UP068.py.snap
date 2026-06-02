@@ -1,0 +1,73 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+ --> UP068.py:7:1
+  |
+7 | gzip.GzipFile(fileobj=open("archive.gz", "wb"))
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+8 | gzip.GzipFile(None, fileobj=open("archive.gz", "ab"))
+9 | gzip.GzipFile(fileobj=pathlib.Path("archive.gz").open("xb"))
+  |
+
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+  --> UP068.py:8:1
+   |
+ 7 | gzip.GzipFile(fileobj=open("archive.gz", "wb"))
+ 8 | gzip.GzipFile(None, fileobj=open("archive.gz", "ab"))
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 9 | gzip.GzipFile(fileobj=pathlib.Path("archive.gz").open("xb"))
+10 | gzip.GzipFile(fileobj=tempfile.NamedTemporaryFile())
+   |
+
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+  --> UP068.py:9:1
+   |
+ 7 | gzip.GzipFile(fileobj=open("archive.gz", "wb"))
+ 8 | gzip.GzipFile(None, fileobj=open("archive.gz", "ab"))
+ 9 | gzip.GzipFile(fileobj=pathlib.Path("archive.gz").open("xb"))
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10 | gzip.GzipFile(fileobj=tempfile.NamedTemporaryFile())
+11 | gzip.GzipFile(fileobj=tempfile.SpooledTemporaryFile())
+   |
+
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+  --> UP068.py:10:1
+   |
+ 8 | gzip.GzipFile(None, fileobj=open("archive.gz", "ab"))
+ 9 | gzip.GzipFile(fileobj=pathlib.Path("archive.gz").open("xb"))
+10 | gzip.GzipFile(fileobj=tempfile.NamedTemporaryFile())
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+11 | gzip.GzipFile(fileobj=tempfile.SpooledTemporaryFile())
+   |
+
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+  --> UP068.py:11:1
+   |
+ 9 | gzip.GzipFile(fileobj=pathlib.Path("archive.gz").open("xb"))
+10 | gzip.GzipFile(fileobj=tempfile.NamedTemporaryFile())
+11 | gzip.GzipFile(fileobj=tempfile.SpooledTemporaryFile())
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+12 |
+13 | raw = open("archive.gz", "wb")
+   |
+
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+  --> UP068.py:14:1
+   |
+13 | raw = open("archive.gz", "wb")
+14 | gzip.GzipFile(fileobj=raw)
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+15 |
+16 | tmp = tempfile.TemporaryFile()
+   |
+
+UP068 Opening `gzip.GzipFile` for writing without explicit `mode` is deprecated
+  --> UP068.py:17:1
+   |
+16 | tmp = tempfile.TemporaryFile()
+17 | gzip.GzipFile(fileobj=tmp)
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+18 |
+19 | gzip.GzipFile(fileobj=open("archive.gz", "rb"))
+   |

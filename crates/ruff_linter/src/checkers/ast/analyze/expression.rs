@@ -689,6 +689,11 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
             if checker.is_rule_enabled(Rule::OSErrorAlias) {
                 pyupgrade::rules::os_error_alias_call(checker, func);
             }
+            if checker.is_rule_enabled(Rule::DeprecatedGzipFileWithoutMode) {
+                if checker.target_version() >= PythonVersion::PY39 {
+                    pyupgrade::rules::deprecated_gzipfile_without_mode(checker, call);
+                }
+            }
             if checker.is_rule_enabled(Rule::TimeoutErrorAlias) {
                 if checker.target_version() >= PythonVersion::PY310 {
                     pyupgrade::rules::timeout_error_alias_call(checker, func);
