@@ -486,6 +486,9 @@ pub(crate) fn expression(expr: &Expr, checker: &Checker) {
             if checker.is_rule_enabled(Rule::DeprecatedMockImport) {
                 pyupgrade::rules::deprecated_mock_attribute(checker, attribute);
             }
+            if checker.is_rule_enabled(Rule::DeprecatedPicklePicklerFast) {
+                pyupgrade::rules::deprecated_pickle_pickler_fast(checker, expr);
+            }
             if checker.is_rule_enabled(Rule::SixPY3) {
                 flake8_2020::rules::name_or_attribute(checker, expr);
             }

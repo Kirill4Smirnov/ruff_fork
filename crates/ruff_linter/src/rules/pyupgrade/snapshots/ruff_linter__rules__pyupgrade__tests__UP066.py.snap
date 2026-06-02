@@ -1,0 +1,68 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP066 `pickle.Pickler.fast` is deprecated
+ --> UP066.py:7:1
+  |
+6 | pickler = pickle.Pickler(io.BytesIO())
+7 | pickler.fast = True
+  | ^^^^^^^^^^^^
+8 | value = pickler.fast
+  |
+
+UP066 `pickle.Pickler.fast` is deprecated
+  --> UP066.py:8:9
+   |
+ 6 | pickler = pickle.Pickler(io.BytesIO())
+ 7 | pickler.fast = True
+ 8 | value = pickler.fast
+   |         ^^^^^^^^^^^^
+ 9 |
+10 | pickler_alias = Pickler(io.BytesIO())
+   |
+
+UP066 `pickle.Pickler.fast` is deprecated
+  --> UP066.py:11:1
+   |
+10 | pickler_alias = Pickler(io.BytesIO())
+11 | pickler_alias.fast = True
+   | ^^^^^^^^^^^^^^^^^^
+12 |
+13 | pickle.Pickler.fast
+   |
+
+UP066 `pickle.Pickler.fast` is deprecated
+  --> UP066.py:13:1
+   |
+11 | pickler_alias.fast = True
+12 |
+13 | pickle.Pickler.fast
+   | ^^^^^^^^^^^^^^^^^^^
+14 | Pickler.fast
+   |
+
+UP066 `pickle.Pickler.fast` is deprecated
+  --> UP066.py:14:1
+   |
+13 | pickle.Pickler.fast
+14 | Pickler.fast
+   | ^^^^^^^^^^^^
+15 |
+16 | (pickle.Pickler(io.BytesIO())).fast
+   |
+
+UP066 `pickle.Pickler.fast` is deprecated
+  --> UP066.py:16:1
+   |
+14 | Pickler.fast
+15 |
+16 | (pickle.Pickler(io.BytesIO())).fast
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+
+UP066 `pickle.Pickler.fast` is deprecated
+  --> UP066.py:23:1
+   |
+23 | CustomPickler.fast
+   | ^^^^^^^^^^^^^^^^^^
+   |
