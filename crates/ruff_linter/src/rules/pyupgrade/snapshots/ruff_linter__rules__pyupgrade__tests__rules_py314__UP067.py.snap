@@ -1,0 +1,86 @@
+---
+source: crates/ruff_linter/src/rules/pyupgrade/mod.rs
+---
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+ --> UP067.py:5:1
+  |
+5 | tomllib.TOMLDecodeError("msg")
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6 | tomllib.TOMLDecodeError("msg", "doc")
+7 | tomllib.TOMLDecodeError("msg", "doc", 1, "extra")
+  |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+ --> UP067.py:6:1
+  |
+5 | tomllib.TOMLDecodeError("msg")
+6 | tomllib.TOMLDecodeError("msg", "doc")
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+7 | tomllib.TOMLDecodeError("msg", "doc", 1, "extra")
+8 | tomllib.TOMLDecodeError(msg="msg", doc="doc")
+  |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+ --> UP067.py:7:1
+  |
+5 | tomllib.TOMLDecodeError("msg")
+6 | tomllib.TOMLDecodeError("msg", "doc")
+7 | tomllib.TOMLDecodeError("msg", "doc", 1, "extra")
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+8 | tomllib.TOMLDecodeError(msg="msg", doc="doc")
+9 | tomllib.TOMLDecodeError(pos=1)
+  |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+  --> UP067.py:8:1
+   |
+ 6 | tomllib.TOMLDecodeError("msg", "doc")
+ 7 | tomllib.TOMLDecodeError("msg", "doc", 1, "extra")
+ 8 | tomllib.TOMLDecodeError(msg="msg", doc="doc")
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 9 | tomllib.TOMLDecodeError(pos=1)
+10 | tomllib.TOMLDecodeError("msg", pos=1)
+   |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+  --> UP067.py:9:1
+   |
+ 7 | tomllib.TOMLDecodeError("msg", "doc", 1, "extra")
+ 8 | tomllib.TOMLDecodeError(msg="msg", doc="doc")
+ 9 | tomllib.TOMLDecodeError(pos=1)
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+10 | tomllib.TOMLDecodeError("msg", pos=1)
+11 | tomllib.TOMLDecodeError("msg", doc="doc")
+   |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+  --> UP067.py:10:1
+   |
+ 8 | tomllib.TOMLDecodeError(msg="msg", doc="doc")
+ 9 | tomllib.TOMLDecodeError(pos=1)
+10 | tomllib.TOMLDecodeError("msg", pos=1)
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+11 | tomllib.TOMLDecodeError("msg", doc="doc")
+   |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+  --> UP067.py:11:1
+   |
+ 9 | tomllib.TOMLDecodeError(pos=1)
+10 | tomllib.TOMLDecodeError("msg", pos=1)
+11 | tomllib.TOMLDecodeError("msg", doc="doc")
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+12 |
+13 | TOMLDecodeError("msg")
+   |
+
+UP067 Passing anything other than `msg`, `doc`, and `pos` to `tomllib.TOMLDecodeError` is deprecated
+  --> UP067.py:13:1
+   |
+11 | tomllib.TOMLDecodeError("msg", doc="doc")
+12 |
+13 | TOMLDecodeError("msg")
+   | ^^^^^^^^^^^^^^^^^^^^^^
+14 |
+15 | tomllib.TOMLDecodeError("msg", "doc", 1)
+   |

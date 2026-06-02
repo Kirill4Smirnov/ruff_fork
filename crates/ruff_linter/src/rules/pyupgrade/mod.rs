@@ -243,6 +243,23 @@ mod tests {
         Ok(())
     }
 
+    #[test_case(
+        Rule::DeprecatedTomllibTomlDecodeErrorPositionalArgs,
+        Path::new("UP067.py")
+    )]
+    fn rules_py314(rule_code: Rule, path: &Path) -> Result<()> {
+        let snapshot = format!("rules_py314__{}", path.to_string_lossy());
+        let diagnostics = test_path(
+            Path::new("pyupgrade").join(path).as_path(),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY314.into(),
+                ..settings::LinterSettings::for_rule(rule_code)
+            },
+        )?;
+        assert_diagnostics!(snapshot, diagnostics);
+        Ok(())
+    }
+
     #[test_case(Rule::NonPEP695TypeAlias, Path::new("UP040.py"))]
     #[test_case(Rule::NonPEP695TypeAlias, Path::new("UP040.pyi"))]
     #[test_case(Rule::NonPEP695GenericClass, Path::new("UP046_0.py"))]
@@ -301,6 +318,21 @@ mod tests {
             &settings::LinterSettings {
                 unresolved_target_version: PythonVersion::PY311.into(),
                 ..settings::LinterSettings::for_rule(Rule::NonPEP695TypeAlias)
+            },
+        )?;
+        assert_diagnostics!(diagnostics);
+        Ok(())
+    }
+
+    #[test]
+    fn deprecated_tomllib_toml_decode_error_positional_args_not_applied_py313() -> Result<()> {
+        let diagnostics = test_path(
+            Path::new("pyupgrade/UP067.py"),
+            &settings::LinterSettings {
+                unresolved_target_version: PythonVersion::PY313.into(),
+                ..settings::LinterSettings::for_rule(
+                    Rule::DeprecatedTomllibTomlDecodeErrorPositionalArgs,
+                )
             },
         )?;
         assert_diagnostics!(diagnostics);
